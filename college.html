@@ -1,0 +1,1946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIT Polytechnic, Nagpur — Technical Education & Innovation</title>
+    
+    <!-- Google Fonts: Bodoni Moda & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-primary: #ECE3D1;
+            --bg-secondary: #E6DCC8;
+            --text-primary: #43282A;
+            --text-body: rgba(67, 40, 42, 0.88);
+            --accent-rust: #A86438;
+            --border-color: rgba(67, 40, 42, 0.18);
+            --card-bg: #FAF5EB;
+            --overlay-bg: rgba(67, 40, 42, 0.96);
+            --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Reset & Base Styles */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* SVG Noise Texture Overlay */
+        .bg-grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.04;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, .editorial-heading {
+            font-family: 'Bodoni Moda', serif;
+            font-weight: 500;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .eyebrow {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(0.65rem, 0.8vw, 0.75rem);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            color: var(--accent-rust);
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        /* Global Navigation */
+        header.site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2.5rem;
+            background: linear-gradient(to bottom, rgba(236, 227, 209, 0.95), rgba(236, 227, 209, 0));
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            transition: transform 0.4s var(--transition-smooth), background 0.4s ease;
+        }
+
+        .nav-left, .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            color: var(--accent-rust);
+        }
+
+        .menu-icon-lines {
+            width: 22px;
+            height: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .menu-icon-lines span {
+            display: block;
+            height: 2px;
+            width: 100%;
+            background-color: var(--text-primary);
+            transition: transform 0.3s ease;
+        }
+
+        .brand-identity {
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .brand-identity h1 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+        }
+
+        .brand-identity p {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-rust);
+            margin-top: 0.1rem;
+        }
+
+        .apply-btn {
+            background-color: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 0.65rem 1.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border: 1px solid var(--text-primary);
+            border-radius: 2px;
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .apply-btn:hover {
+            background-color: var(--accent-rust);
+            border-color: var(--accent-rust);
+            color: #fff;
+        }
+
+        /* Navigation Overlay */
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--overlay-bg);
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s var(--transition-smooth);
+        }
+
+        .nav-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .nav-overlay-close {
+            position: absolute;
+            top: 2rem;
+            right: 3rem;
+            background: none;
+            border: none;
+            color: var(--bg-primary);
+            font-size: 2rem;
+            cursor: pointer;
+            font-family: 'Bodoni Moda', serif;
+        }
+
+        .nav-overlay-links {
+            list-style: none;
+            text-align: center;
+        }
+
+        .nav-overlay-links li {
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+
+        .nav-overlay-links a {
+            font-family: 'Bodoni Moda', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: var(--bg-primary);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .nav-overlay-links a:hover {
+            color: var(--accent-rust);
+            transform: translateX(10px);
+        }
+
+        /* Search Modal Overlay */
+        .search-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(236, 227, 209, 0.98);
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .search-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .search-modal-content {
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            background: none;
+            border: none;
+            border-bottom: 2px solid var(--text-primary);
+            font-family: 'Bodoni Moda', serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            color: var(--text-primary);
+            padding: 1rem 0;
+            outline: none;
+            text-align: center;
+        }
+
+        .search-close {
+            position: absolute;
+            top: -5rem;
+            right: 0;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+
+        .search-results {
+            max-height: 300px;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        .search-result-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: padding-left 0.2s ease;
+        }
+
+        .search-result-item:hover {
+            padding-left: 10px;
+        }
+
+        .search-result-item h4 {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+        }
+
+        .search-result-item p {
+            font-size: 0.9rem;
+            color: var(--text-body);
+        }
+
+        /* Sections Common Styling */
+        section {
+            padding: 7rem 4rem;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 1.5rem;
+            }
+            header.site-header {
+                padding: 1rem 1.5rem;
+            }
+        }
+
+        /* SECTION 1 — Cinematic College Hero */
+        .hero-section {
+            height: 100vh;
+            min-height: 700px;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 4rem 5rem 4rem;
+            overflow: hidden;
+            border-bottom: none;
+        }
+
+        .hero-bg-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-bg-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.06);
+            transition: transform 2.2s var(--transition-smooth);
+            filter: brightness(0.85) contrast(1.05);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(67, 40, 42, 0.85) 0%, rgba(67, 40, 42, 0.2) 50%, rgba(67, 40, 42, 0.4) 100%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+            color: var(--bg-primary);
+        }
+
+        .hero-content .eyebrow {
+            color: #D4B598;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 7.5vw, 6.5rem);
+            line-height: 0.95;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: #FAF5EB;
+        }
+
+        .hero-subtitle {
+            font-family: 'Bodoni Moda', serif;
+            font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: #E6DCC8;
+        }
+
+        .hero-desc {
+            font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            color: rgba(236, 227, 209, 0.9);
+            line-height: 1.6;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 0.85rem 2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 2px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-rust);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--bg-primary);
+            padding: 0.85rem 2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid rgba(236, 227, 209, 0.4);
+            border-radius: 2px;
+            transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--bg-primary);
+            background: rgba(236, 227, 209, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* SECTION 2 — College Introduction */
+        .intro-section {
+            background-color: var(--bg-primary);
+            text-align: center;
+            padding: 8rem 2rem;
+        }
+
+        .intro-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .intro-main-statement {
+            font-size: clamp(2rem, 4.5vw, 4rem);
+            line-height: 1.1;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+            color: var(--text-primary);
+        }
+
+        .intro-images-inline {
+            display: inline-block;
+            width: 100px;
+            height: 45px;
+            vertical-align: middle;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0 10px;
+            box-shadow: 0 4px 12px rgba(67, 40, 42, 0.15);
+        }
+
+        .intro-images-inline img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .intro-support-text {
+            font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+            color: var(--text-body);
+            max-width: 750px;
+            margin: 0 auto 3.5rem auto;
+            line-height: 1.7;
+        }
+
+        .intro-highlights {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            border-top: 1px solid var(--border-color);
+            padding-top: 3rem;
+        }
+
+        .highlight-badge {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-rust);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .highlight-badge::before {
+            content: "•";
+            color: var(--text-primary);
+            font-size: 1.2rem;
+        }
+
+        /* SECTION 3 — About the Institution */
+        .about-section {
+            background-color: var(--bg-secondary);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 900px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        .about-content h2 {
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .about-content p {
+            font-size: 1.05rem;
+            color: var(--text-body);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .about-image-wrapper {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(67, 40, 42, 0.12);
+        }
+
+        .about-image-wrapper img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s var(--transition-smooth);
+        }
+
+        .about-image-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .about-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--text-primary);
+            padding-bottom: 3px;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .about-link:hover {
+            color: var(--accent-rust);
+            border-color: var(--accent-rust);
+        }
+
+        .about-stats-row {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .about-stat-item span {
+            display: block;
+            font-family: 'Bodoni Moda', serif;
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .about-stat-item small {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-rust);
+            font-weight: 600;
+        }
+
+        /* SECTION 4 — Academic Departments */
+        .departments-section {
+            background-color: var(--bg-primary);
+        }
+
+        .section-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .section-header-flex h2 {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            text-transform: uppercase;
+            line-height: 1.05;
+        }
+
+        .section-header-flex p {
+            max-width: 450px;
+            color: var(--text-body);
+            font-size: 1.05rem;
+        }
+
+        .departments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .departments-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .dept-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s ease;
+        }
+
+        .dept-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(67, 40, 42, 0.1);
+        }
+
+        .dept-img-container {
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .dept-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s var(--transition-smooth);
+        }
+
+        .dept-card:hover .dept-img-container img {
+            transform: scale(1.05);
+        }
+
+        .dept-body {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .dept-category {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent-rust);
+            margin-bottom: 0.75rem;
+        }
+
+        .dept-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .dept-desc {
+            font-size: 0.95rem;
+            color: var(--text-body);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .dept-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .dept-link span {
+            transition: transform 0.3s ease;
+        }
+
+        .dept-link:hover {
+            color: var(--accent-rust);
+        }
+
+        .dept-link:hover span {
+            transform: translateX(6px);
+        }
+
+        /* SECTION 5 — Admissions */
+        .admissions-section {
+            background-color: var(--bg-secondary);
+        }
+
+        .admissions-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .admissions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .admission-step-card {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem 2rem;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .step-number {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 2.5rem;
+            color: var(--accent-rust);
+            margin-bottom: 1rem;
+            display: block;
+            font-weight: 600;
+        }
+
+        .admission-step-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .admission-step-card p {
+            font-size: 0.9rem;
+            color: var(--text-body);
+            line-height: 1.6;
+        }
+
+        .admissions-form-wrapper {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 4rem;
+            border-radius: 4px;
+            margin-top: 4rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .admissions-form-wrapper {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        @media (max-width: 768px) {
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+        }
+
+        .form-group label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--border-color);
+            padding: 0.85rem 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            border-radius: 2px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--accent-rust);
+            background: #fff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-feedback {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--accent-rust);
+            display: none;
+        }
+
+        /* SECTION 6 — Placements and Career Development */
+        .placements-section {
+            background-color: var(--bg-primary);
+        }
+
+        .placements-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 900px) {
+            .placements-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .placement-feature-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 3rem 2.5rem;
+            border-radius: 4px;
+        }
+
+        .placement-feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .placement-feature-card p {
+            font-size: 0.95rem;
+            color: var(--text-body);
+            line-height: 1.6;
+        }
+
+        .placements-banner-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-top: 4rem;
+            box-shadow: 0 15px 30px rgba(67, 40, 42, 0.1);
+        }
+
+        /* SECTION 7 — Campus Life and Student Experience */
+        .campus-life-section {
+            background-color: var(--bg-secondary);
+        }
+
+        .campus-gallery-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.5fr;
+            grid-template-rows: 350px 350px;
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 900px) {
+            .campus-gallery-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+        }
+
+        .gallery-item {
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(67, 40, 42, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s var(--transition-smooth);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.04);
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-row: span 2;
+        }
+
+        /* SECTION 8 — Why Choose NIT Polytechnic? */
+        .why-choose-section {
+            background-color: var(--bg-primary);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 1024px) {
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .why-col {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem 2rem;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .why-col::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 2rem;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-rust);
+        }
+
+        .why-col h3 {
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .why-col p {
+            font-size: 0.9rem;
+            color: var(--text-body);
+            line-height: 1.6;
+        }
+
+        /* SECTION 9 — Contact and Visit Us */
+        .contact-section {
+            background-color: var(--bg-secondary);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 900px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-info-box {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-block h4 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-rust);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-block p, .contact-block a {
+            font-size: 1.05rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .contact-block a:hover {
+            color: var(--accent-rust);
+        }
+
+        .contact-form-box {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-form-box {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* SECTION 10 — Final Call to Action */
+        .final-cta-section {
+            height: 80vh;
+            min-height: 550px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+            overflow: hidden;
+            border-bottom: none;
+        }
+
+        .final-cta-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .final-cta-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8) contrast(1.05);
+        }
+
+        .final-cta-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(67, 40, 42, 0.75);
+            z-index: 2;
+        }
+
+        .final-cta-content {
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
+            color: var(--bg-primary);
+        }
+
+        .final-cta-content h2 {
+            font-size: clamp(2.5rem, 5.5vw, 5rem);
+            color: #FAF5EB;
+            text-transform: uppercase;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+        }
+
+        .final-cta-content p {
+            font-size: clamp(1rem, 1.3vw, 1.2rem);
+            color: rgba(236, 227, 209, 0.9);
+            margin-bottom: 2.5rem;
+        }
+
+        /* SECTION 11 — Footer */
+        footer.site-footer {
+            background-color: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 6rem 4rem 3rem 4rem;
+        }
+
+        @media (max-width: 768px) {
+            footer.site-footer {
+                padding: 4rem 1.5rem 2rem 1.5rem;
+            }
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid rgba(236, 227, 209, 0.2);
+        }
+
+        @media (max-width: 900px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+        }
+
+        .footer-brand h2 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 1.8rem;
+            color: var(--bg-primary);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-brand p {
+            font-size: 0.95rem;
+            color: rgba(236, 227, 209, 0.7);
+            max-width: 350px;
+            line-height: 1.6;
+        }
+
+        .footer-col h4 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #D4B598;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.85rem;
+        }
+
+        .footer-col ul a {
+            color: rgba(236, 227, 209, 0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col ul a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 3rem;
+            font-size: 0.85rem;
+            color: rgba(236, 227, 209, 0.6);
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        /* Animation Classes */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+        }
+
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .letter-span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(25px) rotate(3deg);
+            transition: opacity 0.6s ease, transform 0.6s var(--transition-smooth);
+        }
+
+        .letter-span.active {
+            opacity: 1;
+            transform: translateY(0) rotate(0deg);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SVG Noise Background Grain -->
+    <div class="bg-grain"></div>
+
+    <!-- Global Navigation -->
+    <header class="site-header" id="site-header">
+        <div class="nav-left">
+            <button class="nav-btn" id="menu-toggle" aria-label="Open navigation menu">
+                <div class="menu-icon-lines">
+                    <span></span>
+                    <span></span>
+                </div>
+                <span style="display: none;" class="menu-text-label">MENU</span>
+            </button>
+        </div>
+        <a href="#" class="brand-identity">
+            <h1>NIT Polytechnic</h1>
+            <p>Nagpur, Maharashtra</p>
+        </a>
+        <div class="nav-right">
+            <button class="nav-btn" id="search-toggle" aria-label="Open search">
+                <span>SEARCH</span>
+            </button>
+            <a href="#admissions" class="apply-btn">Apply Now</a>
+        </div>
+    </header>
+
+    <!-- Fullscreen Navigation Overlay -->
+    <div class="nav-overlay" id="nav-overlay">
+        <button class="nav-overlay-close" id="nav-close" aria-label="Close navigation menu">&times;</button>
+        <ul class="nav-overlay-links">
+            <li><a href="#hero" class="nav-link-item">Home</a></li>
+            <li><a href="#about" class="nav-link-item">About</a></li>
+            <li><a href="#departments" class="nav-link-item">Departments</a></li>
+            <li><a href="#admissions" class="nav-link-item">Admissions</a></li>
+            <li><a href="#placements" class="nav-link-item">Placements</a></li>
+            <li><a href="#campus-life" class="nav-link-item">Campus Life</a></li>
+            <li><a href="#contact" class="nav-link-item">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Search Modal Overlay -->
+    <div class="search-modal" id="search-modal">
+        <div class="search-modal-content">
+            <div class="search-input-wrapper">
+                <button class="search-close" id="search-close">CLOSE [ESC]</button>
+                <input type="text" class="search-input" id="search-input" placeholder="Type to search programs, admissions, campus..." autocomplete="off">
+            </div>
+            <div class="search-results" id="search-results">
+                <!-- Dynamic search results populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <!-- SECTION 1 — Cinematic College Hero -->
+        <section class="hero-section" id="hero">
+            <div class="hero-bg-wrapper">
+                <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=2000&q=85" alt="NIT Polytechnic Nagpur campus academic building and architecture">
+            </div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <span class="eyebrow">ENGINEERING • TECHNOLOGY • INNOVATION</span>
+                <h1 class="hero-title animate-letters">NIT POLYTECHNIC</h1>
+                <p class="hero-subtitle">BUILDING SKILLS. SHAPING FUTURES.</p>
+                <p class="hero-desc">Discover technical education, hands-on learning, and opportunities to prepare for a changing world at our Nagpur campus.</p>
+                <div class="hero-cta-group">
+                    <a href="#departments" class="btn-primary">Explore Programs</a>
+                    <a href="#admissions" class="btn-secondary">Admissions</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2 — College Introduction -->
+        <section class="intro-section" id="intro">
+            <div class="intro-container reveal-up">
+                <span class="eyebrow">WELCOME TO NIT POLYTECHNIC</span>
+                <h2 class="intro-main-statement">
+                    Learn with purpose. 
+                    <span class="intro-images-inline">
+                        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=400&q=80" alt="Engineering students in laboratory">
+                    </span>
+                    Build for tomorrow.
+                </h2>
+                <p class="intro-support-text">
+                    Technical education is about more than learning concepts. It is about developing practical skills, solving real problems, collaborating with others, and preparing for meaningful careers in engineering and technology.
+                </p>
+                <div class="intro-highlights">
+                    <div class="highlight-badge">Practical Learning</div>
+                    <div class="highlight-badge">Technical Knowledge</div>
+                    <div class="highlight-badge">Career Preparation</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3 — About the Institution -->
+        <section class="about-section" id="about">
+            <div class="about-grid">
+                <div class="about-content reveal-up">
+                    <span class="eyebrow">ABOUT THE INSTITUTION</span>
+                    <h2>Education that moves you forward.</h2>
+                    <p>
+                        NIT Polytechnic, Nagpur, is presented here as a technical education destination focused on learning, practical understanding, and student development. Explore the institution, its academic environment, and the opportunities available to students pursuing technical education.
+                    </p>
+                    <p>
+                        From classroom learning to laboratory practice, technical education helps students build a foundation for further study, professional development, and the evolving demands of industry.
+                    </p>
+                    <div class="about-stats-row">
+                        <div class="about-stat-item">
+                            <span>Diploma</span>
+                            <small>Programs Offered</small>
+                        </div>
+                        <div class="about-stat-item">
+                            <span>Hands-On</span>
+                            <small>Laboratory Training</small>
+                        </div>
+                        <div class="about-stat-item">
+                            <span>Nagpur</span>
+                            <small>Prime Location</small>
+                        </div>
+                    </div>
+                    <a href="#contact" class="about-link">Discover Our College <span>&rarr;</span></a>
+                </div>
+                <div class="about-image-wrapper reveal-up">
+                    <img src="https://img.freepik.com/premium-photo/group-college-students-collaborating-project-studying-together-campus-lawn_1218867-452263.jpg" alt="Students collaborating on academic project">
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4 — Academic Departments -->
+        <section class="departments-section" id="departments">
+            <div class="section-header-flex reveal-up">
+                <div>
+                    <span class="eyebrow">ACADEMIC PROGRAMS</span>
+                    <h2>Find your field.</h2>
+                </div>
+                <p>Explore technical disciplines, discover your interests, and build the foundation for your next step in engineering.</p>
+            </div>
+            <div class="departments-grid">
+                <div class="dept-card reveal-up">
+                    <div class="dept-img-container">
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80" alt="Computer Engineering laboratory">
+                    </div>
+                    <div class="dept-body">
+                        <span class="dept-category">Diploma Program</span>
+                        <h3 class="dept-title">Computer Engineering</h3>
+                        <p class="dept-desc">Explore programming, computing fundamentals, software development, and the technologies behind digital systems.</p>
+                        <a href="#admissions" class="dept-link">Explore Department <span>&rarr;</span></a>
+                    </div>
+                </div>
+
+                <div class="dept-card reveal-up">
+                    <div class="dept-img-container">
+                        <img src="https://engineersnetwork.org/wp-content/uploads/2019/02/What-is-the-field-of-Mechanical-Engineering-2.jpg" alt="Mechanical Engineering workshop">
+                    </div>
+                    <div class="dept-body">
+                        <span class="dept-category">Diploma Program</span>
+                        <h3 class="dept-title">Mechanical Engineering</h3>
+                        <p class="dept-desc">Discover engineering design, manufacturing principles, mechanical systems, and practical workshop learning.</p>
+                        <a href="#admissions" class="dept-link">Explore Department <span>&rarr;</span></a>
+                    </div>
+                </div>
+
+                <div class="dept-card reveal-up">
+                    <div class="dept-img-container">
+                        <img src="https://ecoprimagroup.com/wp-content/uploads/2025/01/top-view-professional-civil-engineer-planning-building-construction-aig53f-scaled.jpg" alt="Civil Engineering site and construction">
+                    </div>
+                    <div class="dept-body">
+                        <span class="dept-category">Diploma Program</span>
+                        <h3 class="dept-title">Civil Engineering</h3>
+                        <p class="dept-desc">Understand construction, infrastructure, surveying, materials, and the built environment.</p>
+                        <a href="#admissions" class="dept-link">Explore Department <span>&rarr;</span></a>
+                    </div>
+                </div>
+
+                <div class="dept-card reveal-up">
+                    <div class="dept-img-container">
+                        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80" alt="Electrical Engineering laboratory">
+                    </div>
+                    <div class="dept-body">
+                        <span class="dept-category">Diploma Program</span>
+                        <h3 class="dept-title">Electrical Engineering</h3>
+                        <p class="dept-desc">Study electrical systems, circuits, machines, and the foundations of electrical technology.</p>
+                        <a href="#admissions" class="dept-link">Explore Department <span>&rarr;</span></a>
+                    </div>
+                </div>
+
+                <div class="dept-card reveal-up">
+                    <div class="dept-img-container">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80" alt="Electronics and Telecommunication Engineering">
+                    </div>
+                    <div class="dept-body">
+                        <span class="dept-category">Diploma Program</span>
+                        <h3 class="dept-title">Electronics Engineering</h3>
+                        <p class="dept-desc">Explore electronic circuits, components, instrumentation, and modern electronic systems.</p>
+                        <a href="#admissions" class="dept-link">Explore Department <span>&rarr;</span></a>
+                    </div>
+                </div>
+
+                <div class="dept-card reveal-up">
+                    <div class="dept-img-container">
+                        <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" alt="Students collaborating on technical projects">
+                    </div>
+                    <div class="dept-body">
+                        <span class="dept-category">Technical Programs</span>
+                        <h3 class="dept-title">Specialized Workshops</h3>
+                        <p class="dept-desc">Discover additional skill development sessions and technical training programs offered by the institution.</p>
+                        <a href="#admissions" class="dept-link">Explore Department <span>&rarr;</span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5 — Admissions -->
+        <section class="admissions-section" id="admissions">
+            <div class="admissions-container">
+                <div class="reveal-up" style="text-align: center; max-width: 800px; margin: 0 auto;">
+                    <span class="eyebrow">YOUR NEXT CHAPTER STARTS HERE</span>
+                    <h2 style="font-size: clamp(2.5rem, 4vw, 4rem); text-transform: uppercase; margin-bottom: 1.5rem;">Take the first step.</h2>
+                    <p style="color: var(--text-body); font-size: 1.05rem; line-height: 1.7;">
+                        Explore your options, understand the admission process, and prepare for your next step in technical education at NIT Polytechnic, Nagpur.
+                    </p>
+                </div>
+
+                <div class="admissions-grid">
+                    <div class="admission-step-card reveal-up">
+                        <span class="step-number">01</span>
+                        <h3>Explore Programs</h3>
+                        <p>Review the diploma courses and eligibility requirements officially offered by the institution.</p>
+                    </div>
+                    <div class="admission-step-card reveal-up">
+                        <span class="step-number">02</span>
+                        <h3>Check Eligibility</h3>
+                        <p>Confirm the current eligibility criteria, required qualifications, and applicable admission rules.</p>
+                    </div>
+                    <div class="admission-step-card reveal-up">
+                        <span class="step-number">03</span>
+                        <h3>Prepare Documents</h3>
+                        <p>Review the official document checklist and prepare the required academic and identity documents.</p>
+                    </div>
+                    <div class="admission-step-card reveal-up">
+                        <span class="step-number">04</span>
+                        <h3>Complete Application</h3>
+                        <p>Follow the verified application instructions, deadlines, and admission process published by the institution.</p>
+                    </div>
+                </div>
+
+                <!-- Admissions Enquiry Form -->
+                <div class="admissions-form-wrapper reveal-up">
+                    <div style="margin-bottom: 2.5rem; text-align: center;">
+                        <span class="eyebrow">GET IN TOUCH</span>
+                        <h3 style="font-size: 2rem; text-transform: uppercase;">Admission Enquiry Form</h3>
+                    </div>
+                    <form id="admissions-form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="adm-name">Full Name *</label>
+                                <input type="text" id="adm-name" required placeholder="Enter your full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="adm-email">Email Address *</label>
+                                <input type="email" id="adm-email" required placeholder="name@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="adm-mobile">Mobile Number *</label>
+                                <input type="tel" id="adm-mobile" required placeholder="+91 98765 43210">
+                            </div>
+                            <div class="form-group">
+                                <label for="adm-program">Program of Interest *</label>
+                                <select id="adm-program" required>
+                                    <option value="">Select Department</option>
+                                    <option value="Computer Engineering">Computer Engineering</option>
+                                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                    <option value="Civil Engineering">Civil Engineering</option>
+                                    <option value="Electrical Engineering">Electrical Engineering</option>
+                                    <option value="Electronics Engineering">Electronics Engineering</option>
+                                </select>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="adm-message">Message / Query</label>
+                                <textarea id="adm-message" placeholder="Ask about admissions, eligibility, or campus visits..."></textarea>
+                            </div>
+                            <div class="form-group full-width">
+                                <button type="submit" class="btn-primary" style="cursor: pointer; border: none; width: 100%; text-align: center;">Submit Enquiry</button>
+                                <div class="form-feedback" id="adm-feedback">Thank you! Your enquiry has been recorded. Our admissions team will get in touch with you shortly. (Note: Front-end demo form).</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6 — Placements and Career Development -->
+        <section class="placements-section" id="placements">
+            <div class="section-header-flex reveal-up">
+                <div>
+                    <span class="eyebrow">CAREERS & OPPORTUNITIES</span>
+                    <h2>Prepare for what's next.</h2>
+                </div>
+                <p>Build practical capabilities, strengthen your technical understanding, and develop the confidence to take your next step toward the world of work.</p>
+            </div>
+            
+            <div class="placements-grid">
+                <div class="placement-feature-card reveal-up">
+                    <span class="eyebrow">SKILL BUILDING</span>
+                    <h3>Industry Readiness</h3>
+                    <p>Highlighting the importance of technical fundamentals, effective communication, teamwork, and problem-solving in real industrial environments.</p>
+                </div>
+                <div class="placement-feature-card reveal-up">
+                    <span class="eyebrow">HANDS-ON PRACTICE</span>
+                    <h3>Practical Projects</h3>
+                    <p>Students working on engineering projects, design demonstrations, prototypes, and rigorous laboratory assignments under faculty mentorship.</p>
+                </div>
+                <div class="placement-feature-card reveal-up">
+                    <span class="eyebrow">PROFESSIONAL GROWTH</span>
+                    <h3>Career Preparation</h3>
+                    <p>Describing interview preparation, resume development, professional communication, and career guidance as opportunities where offered by the institution.</p>
+                </div>
+            </div>
+
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80" alt="Students in professional workshop and training session" class="placements-banner-img reveal-up">
+        </section>
+
+        <!-- SECTION 7 — Campus Life and Student Experience -->
+        <section class="campus-life-section" id="campus-life">
+            <div class="reveal-up" style="max-width: 800px;">
+                <span class="eyebrow">LIFE ON CAMPUS</span>
+                <h2 style="font-size: clamp(2.5rem, 4vw, 4rem); text-transform: uppercase; margin-bottom: 1.5rem;">More than a classroom.</h2>
+                <p style="color: var(--text-body); font-size: 1.05rem; line-height: 1.7;">
+                    Learning continues through collaboration, curiosity, shared experiences, and the everyday moments that make a college journey memorable at NIT Polytechnic, Nagpur.
+                </p>
+            </div>
+
+            <div class="campus-gallery-grid">
+                <div class="gallery-item reveal-up">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=80" alt="Students studying together on campus">
+                </div>
+                <div class="gallery-item reveal-up">
+                    <img src="https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?auto=format&fit=crop&w=800&q=80" alt="College library and study hall">
+                </div>
+                <div class="gallery-item reveal-up">
+                    <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80" alt="Laboratory equipment and technical activity">
+                </div>
+                <div class="gallery-item reveal-up">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80" alt="Technical exhibition and student project presentation">
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 8 — Why Choose NIT Polytechnic? -->
+        <section class="why-choose-section" id="why-choose">
+            <div class="reveal-up" style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <span class="eyebrow">THE LEARNING EXPERIENCE</span>
+                <h2 style="font-size: clamp(2.5rem, 4vw, 4rem); text-transform: uppercase; margin-bottom: 1.5rem;">Skills that take you further.</h2>
+                <p style="color: var(--text-body); font-size: 1.05rem;">A structured academic approach focused on building reliable technical foundations.</p>
+            </div>
+
+            <div class="why-grid">
+                <div class="why-col reveal-up">
+                    <h3>Practical Learning</h3>
+                    <p>Connect technical concepts with demonstrations, experiments, and hands-on laboratory learning opportunities.</p>
+                </div>
+                <div class="why-col reveal-up">
+                    <h3>Technical Foundations</h3>
+                    <p>Build a solid, thorough understanding of the scientific and mathematical principles behind engineering and modern technology.</p>
+                </div>
+                <div class="why-col reveal-up">
+                    <h3>Collaborative Thinking</h3>
+                    <p>Learn to communicate ideas effectively, solve complex technical problems, and work successfully with peers and mentors.</p>
+                </div>
+                <div class="why-col reveal-up">
+                    <h3>Future Readiness</h3>
+                    <p>Develop the essential knowledge and transferable professional skills that support further higher education and career exploration.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 9 — Contact and Visit Us -->
+        <section class="contact-section" id="contact">
+            <div class="reveal-up">
+                <span class="eyebrow">LET'S CONNECT</span>
+                <h2 style="font-size: clamp(2.5rem, 4vw, 4rem); text-transform: uppercase; margin-bottom: 1.5rem;">Your journey starts with a conversation.</h2>
+                <p style="color: var(--text-body); font-size: 1.05rem; max-width: 600px;">Have questions about programs, admissions, or campus life? Get in touch to find the information you need.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info-box reveal-up">
+                    <div class="contact-block">
+                        <h4>College Address</h4>
+                        <p>[Insert verified college address, Nagpur, Maharashtra, India]</p>
+                    </div>
+                    <div class="contact-block">
+                        <h4>Admissions Office & Phone</h4>
+                        <p><a href="tel:[InsertOfficialPhone]">[Insert official admissions phone number]</a></p>
+                    </div>
+                    <div class="contact-block">
+                        <h4>Email Address</h4>
+                        <p><a href="mailto:[InsertOfficialEmail]">[Insert official email address]</a></p>
+                    </div>
+                    <div class="contact-block">
+                        <h4>Official Website</h4>
+                        <p><a href="#" target="_blank" rel="noopener">[Insert official website link]</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-form-box reveal-up">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 2rem; text-transform: uppercase;">Send a Message</h3>
+                    <form id="contact-form">
+                        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                            <div class="form-group">
+                                <label for="con-name">Your Name *</label>
+                                <input type="text" id="con-name" required placeholder="Full Name">
+                            </div>
+                            <div class="form-group">
+                                <label for="con-email">Email Address *</label>
+                                <input type="email" id="con-email" required placeholder="name@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="con-subject">Subject *</label>
+                                <input type="text" id="con-subject" required placeholder="Enquiry Subject">
+                            </div>
+                            <div class="form-group">
+                                <label for="con-msg">Message *</label>
+                                <textarea id="con-msg" required placeholder="Your message here..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary" style="cursor: pointer; border: none; text-align: center;">Send Message</button>
+                            <div class="form-feedback" id="con-feedback">Message sent successfully! We will get back to you soon.</div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 10 — Final Call to Action -->
+        <section class="final-cta-section" id="final-cta">
+            <div class="final-cta-bg">
+                <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=2000&q=85" alt="Graduation and campus celebration">
+            </div>
+            <div class="final-cta-overlay"></div>
+            <div class="final-cta-content reveal-up">
+                <h2>Your future starts with a step.</h2>
+                <p>Explore your options. Discover your interests. Begin your technical education journey at NIT Polytechnic, Nagpur.</p>
+                <div class="hero-cta-group" style="justify-content: center;">
+                    <a href="#departments" class="btn-primary">Explore Departments</a>
+                    <a href="#admissions" class="btn-secondary">Enquire About Admissions</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- SECTION 11 — Footer -->
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <h2>NIT Polytechnic</h2>
+                <p>Technical education. Practical learning. Future possibilities in Nagpur, Maharashtra.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#departments">Departments</a></li>
+                    <li><a href="#admissions">Admissions</a></li>
+                    <li><a href="#placements">Placements</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Campus & Life</h4>
+                <ul>
+                    <li><a href="#campus-life">Campus Life</a></li>
+                    <li><a href="#why-choose">Why Choose Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Institutional</h4>
+                <ul>
+                    <li><a href="#hero">Official Website</a></li>
+                    <li><a href="#admissions">Admission Info</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year">2026</span> NIT Polytechnic, Nagpur. All rights reserved.</p>
+            <p>Designed with an editorial academic aesthetic.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Dynamic Copyright Year
+            const yearSpan = document.getElementById('current-year');
+            if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+            }
+
+            // 2. Mobile Menu / Navigation Overlay Toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const navOverlay = document.getElementById('nav-overlay');
+            const navClose = document.getElementById('nav-close');
+            const navLinks = document.querySelectorAll('.nav-link-item');
+
+            function toggleMenu() {
+                navOverlay.classList.toggle('active');
+                document.body.style.overflow = navOverlay.classList.contains('active') ? 'hidden' : '';
+            }
+
+            if (menuToggle) menuToggle.addEventListener('click', toggleMenu);
+            if (navClose) navClose.addEventListener('click', toggleMenu);
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Escape key listener for overlays
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    navOverlay.classList.remove('active');
+                    searchModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // 3. Search Modal Functionality
+            const searchToggle = document.getElementById('search-toggle');
+            const searchModal = document.getElementById('search-modal');
+            const searchClose = document.getElementById('search-close');
+            const searchInput = document.getElementById('search-input');
+            const searchResults = document.getElementById('search-results');
+
+            const searchableData = [
+                { title: "Computer Engineering", category: "Departments", desc: "Explore programming, computing fundamentals, and software development.", link: "#departments" },
+                { title: "Mechanical Engineering", category: "Departments", desc: "Discover engineering design, manufacturing, and workshop learning.", link: "#departments" },
+                { title: "Civil Engineering", category: "Departments", desc: "Understand construction, infrastructure, surveying, and materials.", link: "#departments" },
+                { title: "Electrical Engineering", category: "Departments", desc: "Study electrical systems, circuits, machines, and power technology.", link: "#departments" },
+                { title: "Electronics Engineering", category: "Departments", desc: "Explore electronic circuits, instrumentation, and modern systems.", link: "#departments" },
+                { title: "Admissions Process", category: "Admissions", desc: "Review eligibility criteria, required documents, and application steps.", link: "#admissions" },
+                { title: "Placements & Career Training", category: "Careers", desc: "Build practical capabilities and interview readiness.", link: "#placements" },
+                { title: "Campus Life", category: "Campus", desc: "Student activities, laboratories, and library study spaces.", link: "#campus-life" },
+                { title: "Contact Information", category: "Contact", desc: "Get in touch with the admissions office and administration.", link: "#contact" }
+            ];
+
+            if (searchToggle) {
+                searchToggle.addEventListener('click', () => {
+                    searchModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    setTimeout(() => searchInput.focus(), 100);
+                });
+            }
+
+            if (searchClose) {
+                searchClose.addEventListener('click', () => {
+                    searchModal.classList.remove('active');
+                    document.body.style.overflow = '';
+                    searchInput.value = '';
+                    searchResults.innerHTML = '';
+                });
+            }
+
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase().trim();
+                    searchResults.innerHTML = '';
+
+                    if (query.length === 0) return;
+
+                    const filtered = searchableData.filter(item => 
+                        item.title.toLowerCase().includes(query) || 
+                        item.desc.toLowerCase().includes(query) ||
+                        item.category.toLowerCase().includes(query)
+                    );
+
+                    if (filtered.length === 0) {
+                        searchResults.innerHTML = `<p style="padding: 1rem 0; color: var(--text-body);">No matching results found for "${query}".</p>`;
+                        return;
+                    }
+
+                    filtered.forEach(item => {
+                        const div = document.createElement('div');
+                        div.className = 'search-result-item';
+                        div.innerHTML = `
+                            <span style="font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--accent-rust); letter-spacing: 0.1em;">${item.category}</span>
+                            <h4>${item.title}</h4>
+                            <p>${item.desc}</p>
+                        `;
+                        div.addEventListener('click', () => {
+                            searchModal.classList.remove('active');
+                            document.body.style.overflow = '';
+                            searchInput.value = '';
+                            searchResults.innerHTML = '';
+                            window.location.href = item.link;
+                        });
+                        searchResults.appendChild(div);
+                    });
+                });
+            }
+
+            // 4. Letter-by-Letter Text Animation for Hero Title
+            const animateLettersEls = document.querySelectorAll('.animate-letters');
+            animateLettersEls.forEach(el => {
+                const text = el.textContent;
+                el.textContent = '';
+                
+                // Preserve spaces correctly
+                [...text].forEach((char, index) => {
+                    const span = document.createElement('span');
+                    span.className = 'letter-span';
+                    span.textContent = char === ' ' ? '\u00A0' : char;
+                    span.style.transitionDelay = `${index * 45}ms`;
+                    el.appendChild(span);
+                });
+
+                // Trigger letter reveal after a brief initial pause
+                setTimeout(() => {
+                    el.querySelectorAll('.letter-span').forEach(span => {
+                        span.classList.add('active');
+                    });
+                }, 300);
+            });
+
+            // 5. Intersection Observer for Scroll Reveals
+            const revealElements = document.querySelectorAll('.reveal-up');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -80px 0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            revealElements.forEach(el => observer.observe(el));
+
+            // 6. Form Validation & Submission Feedback
+            const admissionsForm = document.getElementById('admissions-form');
+            if (admissionsForm) {
+                admissionsForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const feedback = document.getElementById('adm-feedback');
+                    feedback.style.display = 'block';
+                    admissionsForm.reset();
+                    setTimeout(() => {
+                        feedback.style.display = 'none';
+                    }, 6000);
+                });
+            }
+
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const feedback = document.getElementById('con-feedback');
+                    feedback.style.display = 'block';
+                    contactForm.reset();
+                    setTimeout(() => {
+                        feedback.style.display = 'none';
+                    }, 6000);
+                });
+            }
+
+            // 7. Optional Recorder Mode (?rec=1)
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('rec') === '1') {
+                console.log("Recorder mode active");
+                // Smooth demonstration scroll simulation
+                const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                if (!prefersReduced) {
+                    setTimeout(() => {
+                        window.scrollTo({ top: window.innerHeight * 0.9, behavior: 'smooth' });
+                    }, 2500);
+                    setTimeout(() => {
+                        window.scrollTo({ top: window.innerHeight * 2.0, behavior: 'smooth' });
+                    }, 5000);
+                }
+            }
+        });
+    </script>
+</body>
+</html> 
